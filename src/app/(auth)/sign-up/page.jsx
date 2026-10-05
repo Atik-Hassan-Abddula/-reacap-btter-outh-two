@@ -2,16 +2,26 @@
 "use client";
 import React from 'react';
 import {Button, Description, FieldError, Form, Input, Label, TextField} from "@heroui/react";
+import { signIn, signUp } from '@/lib/auth-client';
+
 
 
 const SignUp = () => {
-      const onSubmit = (e) => {
+      const onSubmit = async(e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries())
     // Convert FormData to plain object
+    console.log("form data",data)
+
+    const{data:resdat,error}= await signUp.email({
+      name: data.name,
+      email: data.email,
+      password:data.password
+
+    })
+    console.log(resdat,error)
    
-   console.log("form data",data)
   };
 
     return (
